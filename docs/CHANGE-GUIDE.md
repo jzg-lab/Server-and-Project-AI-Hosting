@@ -67,7 +67,7 @@ Agent 建议只能插入在“事实已结构化、草稿已存在”之后，�
 - 修改前、提交前都检查 `git status`。
 - 不使用 `git reset --hard`、`git checkout --` 或批量删除来清理现场。
 - 其他 Agent 的分支或工作树必须先同步、理解并整合，不覆盖其改动。
-- 当前已知没有 Git remote；因此不能把本地提交说成云端备份。
+- 本地完整工作区不配置 Git remote；公开交接快照已发布到 `jzg-lab/Server-and-Project-AI-Hosting`，但不能把本地未推送历史或 `artifacts/` 目录说成公开备份。
 - 一个提交应表达一个可解释的阶段或改动，提交说明要能让后续 Agent 快速判断影响范围。
 
 ## 7. 文档同步规则

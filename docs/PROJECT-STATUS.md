@@ -13,7 +13,7 @@
 - MVP-1：已完成并停止在 M4。
 - H1-H6：已有实现、迁移、测试和验收工件。
 - Post-MVP：Target 级持续观察、告警、Prometheus、服务/端口级完整能力和受控操作仍未完成。
-- GitHub 云端：正在向 `jzg-lab/Server-and-Project-AI-Hosting` 发布脱敏交接快照；在推送命令成功前，不视为已上传。
+- GitHub 云端：脱敏交接快照已上传到 `jzg-lab/Server-and-Project-AI-Hosting` 的 `main`，远端提交为 `bf35dc997558389010cb2a23f605450961595b6b`。
 
 ## 2. 已完成能力
 
@@ -50,17 +50,17 @@
 
 ## 5. 当前工作树
 
-当前分支是 `codex/real-host-acceptance`，最近提交为 `f550f30`（2026-08-15）。当前没有 Git remote。工作区非干净，存在本次文档整理和既有未跟踪材料：
+当前完整工作区分支是 `codex/real-host-acceptance`，最近业务提交为 `f550f30`（2026-08-15）。本地完整工作区故意不配置 Git remote，避免把真实验收历史直接推到公开仓库；公开交接快照在独立临时仓库中以 `main@bf35dc9` 发布。工作区非干净，仍有既有未跟踪材料：
 
 - H1、H2、H3a、H5、H6 验收目录；
 - SSH 密码流程和项目导航截图/验收材料；
 - `docs/AUTH_AUTOMATION_PLAYBOOK.md`；
-- 本次新增但尚未提交的 `docs/AGENT-ONBOARDING.md`、`docs/PROJECT-STATUS.md`、`docs/CHANGE-GUIDE.md`；
-- 本次修改但尚未提交的 `docs/00-文档索引.md`；
-- 本次新增但尚未提交的 `docs/PUBLIC-REPOSITORY-SCOPE.md`；
+- 本次文档整理已在本地 Git 提交中保存；公开版本也已上传并完成远端提交核验；
 - `work/live-app-current.js`、`work/served-app-audit.js`。
 
 这些材料不能自动删除或批量加入提交。处理前应逐项判断：长期有价值的进入 `docs/` 或 `artifacts/`，临时调试材料保留或由用户明确批准清理。
+
+公开仓库地址：`https://github.com/jzg-lab/Server-and-Project-AI-Hosting`。公开版本不包含本地 `artifacts/`、`work/`、真实 HOST 数据和未整合分支，具体边界见 [公开仓库交接范围](./PUBLIC-REPOSITORY-SCOPE.md)。
 
 ## 6. H1-H6 定位表
 
