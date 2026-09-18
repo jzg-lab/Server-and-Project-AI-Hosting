@@ -1,0 +1,19 @@
+{
+    skip_install_trust
+}
+
+https://localhost:18443 {
+    tls internal
+    encode gzip
+
+    header {
+        Strict-Transport-Security "max-age=300"
+        X-Content-Type-Options "nosniff"
+        Referrer-Policy "no-referrer"
+        -Server
+    }
+
+    reverse_proxy 127.0.0.1:18798 {
+        flush_interval -1
+    }
+}

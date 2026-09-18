@@ -1,0 +1,15 @@
+.git
+.gitignore
+.codex
+target
+node_modules
+data
+.tmp
+artifacts
+deploy/.env
+deploy/secrets
+deploy/backups
+deploy/.release-state
+*.db
+*.db-shm
+*.db-wal

@@ -1,0 +1,116 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#081018" />
+    <meta
+      name="description"
+      content="Project Network Visualization 运行视图、控制视图与业务统筹操作记录的可交互 HTML 方案"
+    />
+    <title>业务网视图语义实验</title>
+    <link rel="stylesheet" href="./view-lenses.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="返回当前主界面">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span><strong>Network Atlas</strong><small>视图语义实验</small></span>
+      </a>
+      <div class="prototype-note"><span></span>独立对比稿 · 当前主界面未改动</div>
+      <button class="choice-button" id="choice-button" type="button">
+        <span id="choice-label">标记方案 A</span><i aria-hidden="true">→</i>
+      </button>
+    </header>
+
+    <main>
+      <section class="decision-bar" aria-label="方案与视图选择">
+        <div class="decision-copy">
+          <span>先选空间逻辑</span>
+          <strong id="option-name">A · 稳定骨架</strong>
+        </div>
+        <nav class="option-switch" role="tablist" aria-label="图形方向">
+          <button class="option-tab is-active" data-option="a" role="tab" aria-selected="true">
+            <b>A</b><span>稳定骨架<small>推荐 · 学习成本最低</small></span>
+          </button>
+          <button class="option-tab" data-option="b" role="tab" aria-selected="false">
+            <b>B</b><span>项目聚焦<small>内部路径最清楚</small></span>
+          </button>
+          <button class="option-tab" data-option="c" role="tab" aria-selected="false">
+            <b>C</b><span>环形态势<small>全局感最强</small></span>
+          </button>
+        </nav>
+        <nav class="view-switch" aria-label="页面类型">
+          <button class="view-tab is-active" data-view="run" aria-pressed="true"><span class="view-dot run"></span>运行视图</button>
+          <button class="view-tab" data-view="control" aria-pressed="false"><span class="view-dot control"></span>控制视图</button>
+        </nav>
+      </section>
+
+      <section class="visual-section">
+        <header class="visual-header">
+          <div>
+            <p class="kicker" id="view-kicker">RUN / LIVE LENS</p>
+            <h1 id="view-title">所有项目都在被看护，活动只叠加在真实路径上</h1>
+            <p class="description" id="view-description">稳定保留业务统筹 Agent 与项目的位置，只把正在发生的事件、方向和时间叠加到图上。</p>
+          </div>
+          <div class="signal-summary" id="signal-summary" aria-label="关键信号"></div>
+        </header>
+
+        <div class="canvas-shell">
+          <div class="canvas-toolbar">
+            <span class="mode-badge" id="mode-badge"><i></i>实时态势</span>
+            <div class="toolbar-legend" id="toolbar-legend"></div>
+          </div>
+
+          <svg
+            id="visual-canvas"
+            viewBox="0 0 1000 560"
+            role="img"
+            aria-label="运行或控制视图方案画布"
+            preserveAspectRatio="xMidYMid meet"
+          ></svg>
+
+          <aside class="focus-card" id="focus-card" aria-live="polite"></aside>
+
+          <div class="canvas-foot">
+            <span id="canvas-hint">点击项目查看图形回应；运行页保持只读。</span>
+            <span class="motion-note"><i></i>只有真实活动使用动效</span>
+          </div>
+        </div>
+
+        <div class="rationale-bar">
+          <div><span>这个方案最突出</span><strong id="option-focus">空间连续性</strong></div>
+          <p id="option-rationale">总览、运行、控制共用项目位置，用户不需要每切一页就重新认图。</p>
+          <div class="tradeoff"><span>代价</span><strong id="option-tradeoff">项目内部细节需要点击后展开</strong></div>
+        </div>
+      </section>
+
+      <section class="operations-section" aria-labelledby="operations-title">
+        <header class="operations-header">
+          <div>
+            <p class="kicker">COORDINATOR LOG</p>
+            <h2 id="operations-title">业务统筹 Agent 最近操作</h2>
+            <p>这是审计记录，不是项目自身活动。每条只保留时间、动作、对象和结果。</p>
+          </div>
+          <button class="all-actions-button" type="button">查看全部操作 <span>→</span></button>
+        </header>
+
+        <div class="operation-filter" role="toolbar" aria-label="按项目筛选业务统筹操作">
+          <span>按项目</span>
+          <button class="filter-chip is-active" data-project="all" aria-pressed="true">全部</button>
+          <button class="filter-chip" data-project="Hermes" aria-pressed="false">Hermes</button>
+          <button class="filter-chip" data-project="自动化补池" aria-pressed="false">自动化补池</button>
+          <button class="filter-chip" data-project="知识整理" aria-pressed="false">知识整理</button>
+          <button class="filter-chip" data-project="实验项目" aria-pressed="false">实验项目</button>
+          <span class="filter-count" id="filter-count"></span>
+        </div>
+
+        <div class="operation-list" id="operation-list" aria-live="polite"></div>
+        <p class="operations-rule">项目的任务、调用和服务事件留在运行视图；这里只记录业务统筹 Agent 自己做过的事。</p>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./view-lenses.js"></script>
+  </body>
+</html>

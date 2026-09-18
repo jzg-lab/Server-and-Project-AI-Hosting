@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#071019" />
+    <meta
+      name="description"
+      content="流程框架、运行实例与项目优先资源视图的可交互 HTML 对比稿"
+    />
+    <title>流程与资源视图实验</title>
+    <link rel="stylesheet" href="./workflow-resource-options.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <a class="brand" href="./" aria-label="返回当前主界面">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span><strong>Network Atlas</strong><small>流程与资源视图实验</small></span>
+      </a>
+      <span class="prototype-badge"><i></i>独立对比稿 · 主界面保持上一版</span>
+      <button class="mark-button" id="mark-button" type="button">记录当前选择 <span>→</span></button>
+    </header>
+
+    <main>
+      <section class="question-bar" aria-labelledby="question-title">
+        <div>
+          <p class="eyebrow">FIRST PRINCIPLE</p>
+          <h1 id="question-title">先按用户问题分视图，再决定图长什么样</h1>
+        </div>
+        <nav class="page-switch" aria-label="选择要比较的视图">
+          <button class="page-tab is-active" data-page="workflow" aria-pressed="true">
+            <b>01</b><span>流程与运行<small>应该怎么工作 / 这次怎么跑</small></span>
+          </button>
+          <button class="page-tab" data-page="resource" aria-pressed="false">
+            <b>02</b><span>项目与资源<small>依赖什么 / 谁还在使用</small></span>
+          </button>
+        </nav>
+      </section>
+
+      <section class="experiment-page is-active" id="workflow-page" data-page-panel="workflow">
+        <header class="section-header">
+          <div>
+            <p class="eyebrow cyan">WORKFLOW SEMANTICS</p>
+            <h2>同一张流程图，用两个镜头回答两个问题</h2>
+            <p class="section-description">节点位置保持一致，切换后只改变信息语义，最容易看清“流程框架”和“运行实例”的区别。</p>
+          </div>
+          <nav class="lens-switch" aria-label="流程镜头">
+            <button class="lens-tab is-active" data-workflow-lens="definition" aria-pressed="true">
+              <span class="lens-symbol blueprint"></span><span>流程框架<small>这套业务应该怎样工作</small></span>
+            </button>
+            <button class="lens-tab" data-workflow-lens="run" aria-pressed="false">
+              <span class="lens-symbol live"></span><span>运行实例<small>这一次实际上怎样跑</small></span>
+            </button>
+          </nav>
+        </header>
+
+        <div class="workflow-summary" id="workflow-summary"></div>
+
+        <div class="canvas-shell workflow-shell" id="workflow-shell">
+          <div class="canvas-topline">
+            <span class="canvas-mode" id="workflow-mode"><i></i>可复用蓝图</span>
+            <div class="canvas-legend" id="workflow-legend"></div>
+          </div>
+          <svg id="workflow-canvas" viewBox="0 0 1000 560" role="img" aria-label="流程框架或运行实例图"></svg>
+          <aside class="floating-detail" id="workflow-detail" aria-live="polite"></aside>
+          <div class="canvas-hint" id="workflow-hint">点击任一步骤查看它在流程框架中的定义。</div>
+        </div>
+
+        <div class="semantic-contrast" id="semantic-contrast"></div>
+      </section>
+
+      <section class="experiment-page" id="resource-page" data-page-panel="resource">
+        <header class="section-header resource-heading">
+          <div>
+            <p class="eyebrow cyan">PROJECT-FIRST RESOURCES</p>
+            <h2>资源优先按项目查看，共享资源始终只保留一份</h2>
+            <p class="section-description">项目是业务边界，服务器等资源是独立实体；同一服务器承载多个项目时，通过使用关系连接，而不是复制节点。</p>
+          </div>
+          <div class="resource-principle"><span>唯一实体</span><strong>1 个资源</strong><i>+</i><span>多重关系</span><strong>N 个项目使用</strong></div>
+        </header>
+
+        <div class="resource-controls">
+          <nav class="resource-option-switch" aria-label="资源视图方案">
+            <button class="resource-option is-active" data-resource-option="project" aria-pressed="true">
+              <b>A</b><span>按项目<small>推荐默认入口</small></span>
+            </button>
+            <button class="resource-option" data-resource-option="shared" aria-pressed="false">
+              <b>B</b><span>共享集合<small>跨项目汇总</small></span>
+            </button>
+            <button class="resource-option" data-resource-option="reverse" aria-pressed="false">
+              <b>C</b><span>资源反查<small>查看影响范围</small></span>
+            </button>
+          </nav>
+
+          <div class="project-filter" id="project-filter" role="toolbar" aria-label="按项目筛选资源">
+            <span>项目</span>
+            <button class="project-chip is-active" data-project="hermes" aria-pressed="true">Hermes</button>
+            <button class="project-chip" data-project="automation" aria-pressed="false">自动化补池</button>
+            <button class="project-chip" data-project="knowledge" aria-pressed="false">知识整理</button>
+            <button class="project-chip" data-project="all" aria-pressed="false">全部项目</button>
+          </div>
+        </div>
+
+        <div class="resource-summary" id="resource-summary"></div>
+
+        <div class="canvas-shell resource-shell">
+          <div class="canvas-topline">
+            <span class="canvas-mode resource-mode" id="resource-mode"><i></i>项目资源舱</span>
+            <div class="resource-picker" id="resource-picker" aria-label="选择资源反查"></div>
+            <div class="canvas-legend" id="resource-legend"></div>
+          </div>
+          <svg id="resource-canvas" viewBox="0 0 1000 580" role="img" aria-label="项目资源、共享集合或资源反查图"></svg>
+          <div class="canvas-hint" id="resource-hint">共享服务器位于项目边界之外；选择它即可看到还有哪些项目在使用。</div>
+        </div>
+
+        <section class="resource-inspector" id="resource-inspector" aria-live="polite"></section>
+
+        <div class="option-rationale" id="option-rationale"></div>
+      </section>
+
+      <section class="recommendation">
+        <div><p class="eyebrow">CURRENT RECOMMENDATION</p><h2>默认按项目，点击共享资源后自动进入资源反查</h2></div>
+        <p>这能保持项目边界清楚，同时让一台服务器服务多个项目的事实完整可见。共享集合用于全局盘点，不必成为默认入口。</p>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="./workflow-resource-options.js"></script>
+  </body>
+</html>

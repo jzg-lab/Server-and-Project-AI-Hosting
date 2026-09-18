@@ -1,0 +1,27 @@
+* text=auto
+
+.gitattributes text eol=lf
+.gitignore text eol=lf
+
+*.css text eol=lf
+*.html text eol=lf
+*.js text eol=lf
+*.json text eol=lf
+*.lock text eol=lf
+*.md text eol=lf
+*.ps1 text eol=lf
+*.rs text eol=lf
+*.sh text eol=lf
+*.sql text eol=lf
+*.toml text eol=lf
+*.ts text eol=lf
+
+*.patch -text
+*.png binary
+*.zip binary
+
+# Verification patches contain literal unified-diff context markers such as a
+# single-space blank line. Treat this generated patch as an artifact so Git's
+# whitespace checker evaluates the source changes, not patch syntax itself.
+artifacts/hosts-world-decoupling-20260815/changes.patch binary
+artifacts/h3c-health-final-20260815/network-atlas-h3c-75dea07-to-f5e73eb.patch binary

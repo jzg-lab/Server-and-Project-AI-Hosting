@@ -1,0 +1,12 @@
+[workspace]
+members = ["backend"]
+resolver = "2"
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+rust-version = "1.94"
+
+[profile.release]
+lto = "thin"
+strip = "symbols"

@@ -1,0 +1,13 @@
+{
+  "name": "network-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate:types": "openapi-typescript openapi/openapi.json -o frontend/generated/api.d.ts",
+    "check:frontend": "node --check frontend/data-source.js && node --check frontend/app.js",
+    "test:frontend": "node --test frontend/tests/*.test.js"
+  },
+  "devDependencies": {
+    "openapi-typescript": "7.10.1"
+  }
+}
