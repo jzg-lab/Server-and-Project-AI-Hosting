@@ -55,16 +55,16 @@ Agent 建议只能插入在“事实已结构化、草稿已存在”之后，�
 
 - 仅文档：`git diff --check`，检查链接和路径。
 - 前端逻辑：`node --check`、`npm run test:frontend`。
-- Rust/API/迁移：`cargo fmt`、`cargo check`、相关 `cargo test`、必要时 Clippy。目录映射：H4=`backend/tests/h4_catalog.rs`，H5=`backend/tests/h5_business.rs`，H6=`backend/tests/h6_project_agent.rs`，监控=`backend/tests/monitoring_*.rs`，M0-M4 按对应脚本和测试文件执行。
+- Rust/API/迁移：`cargo fmt`、`cargo check`、相关 `cargo test`、必要时 Clippy。最小定向命令是 `cargo test -p network-atlas --test h4_catalog`、`cargo test -p network-atlas --test h5_business`、`cargo test -p network-atlas --test h6_project_agent`；监控改动按 `monitoring_collection`、`monitoring_health_semantics`、`monitoring_history`、`monitoring_retention`、`monitoring_scheduler` 选择测试。目录映射：H4=`backend/tests/h4_catalog.rs`，H5=`backend/tests/h5_business.rs`，H6=`backend/tests/h6_project_agent.rs`，监控=`backend/tests/monitoring_*.rs`，M0-M4 按对应脚本和测试文件执行。
 - OpenAPI：执行 `cargo run -p network-atlas -- --export-openapi openapi/openapi.json`，再运行 `npm run generate:types`。
 - M0-M4 行为：运行对应 `scripts/verify-m*.ps1`。
-- 真实 HOST/UI：运行真实验收脚本并记录脱敏结果；不能用单元测试替代。
+- live HOST API 投影回归：仅在明确准备好前置数据后运行 `scripts/verify-real-host-acceptance.ps1`；它检查运行中的 HTTP API，不等于浏览器 UI 验收。真实 HOST/UI 必须另行通过产品 UI 验收并记录脱敏结果，不能用单元测试或直连 SSH 替代。
 - 部署文档/脚本：Compose 解析、Shell 语法、`git diff --check`；没有 Linux Docker 实机时只能报告静态通过。
 - API/数据库/前端契约变化：必须重新导出 OpenAPI、生成类型，并补浏览器或同源 API 验收；只跑编译不算完成。
 
 ## 6. Git 与协作规则
 
-- 修改前、提交前都检查 `git status`。
+- 修改前、提交前都检查 `git status`；工作树不干净时只提交本次改动文件，并在提交说明中记录验证范围。
 - 不使用 `git reset --hard`、`git checkout --` 或批量删除来清理现场。
 - 其他 Agent 的分支或工作树必须先同步、理解并整合，不覆盖其改动。
 - 本地完整工作区不配置 Git remote；公开交接快照已发布到 `jzg-lab/Server-and-Project-AI-Hosting`，但不能把本地未推送历史或 `artifacts/` 目录说成公开备份。

@@ -118,7 +118,7 @@ cargo run -p network-atlas
 
 打开 `http://127.0.0.1:18787/`。开发进程启动时会执行迁移、恢复中断任务并启动 scheduler/compactor，因此隔离数据库不是可选优化。只有明确要检查已有本地数据时，才使用默认 `data/network-atlas.db`。
 
-阶段验证优先使用 README 中的统一脚本：`verify-m0.ps1` 到 `verify-m4.ps1`。`verify-real-host-acceptance.ps1` 是固定历史验收数据集回归脚本，不是通用的真实 HOST/UI 验收入口；运行前必须阅读脚本参数和前置数据。真实 HOST 产品验收必须通过 UI 完成，不能用直连 SSH 或后端日志替代。
+阶段验证优先使用 README 中的统一脚本：`verify-m0.ps1` 到 `verify-m4.ps1`。`verify-real-host-acceptance.ps1` 是对正在运行实例执行的 live HTTP 投影回归门槛：它要求 `bootstrap.meta.data_source.kind=real`，校验预先准备的主机投影和 fixture 隔离，并同时运行 Rust、前端和 diff 检查；它不是浏览器 UI 验收，也不是可脱离前置数据运行的固定历史数据集。运行前必须阅读脚本参数和前置数据。真实 HOST 产品验收必须通过 UI 完成，不能用直连 SSH 或后端日志替代。
 
 ## 7. 修改前后检查清单
 
@@ -133,7 +133,7 @@ cargo run -p network-atlas
 
 - 代码改动补行为测试；契约变化重新导出 OpenAPI 和前端类型。
 - 运行与改动风险匹配的最小验证，必要时运行统一阶段脚本。
-- 执行 `git diff --check`。
+- 先对本次改动文件执行 `git diff --check -- <changed-files>`；工作树本来就不干净时，再单独审计全局 `git diff --check` 的既有失败，不要把无关历史材料的告警归到本次改动。
 - 更新 [当前状态与进度](./PROJECT-STATUS.md) 或对应规格，不把已完成事实写入愿景文档。
 - 检查秘密没有进入日志、测试产物、文档、Git 或回复。
 - 最后再次执行 `git status`，清楚区分本次改动与既有未跟踪材料。
